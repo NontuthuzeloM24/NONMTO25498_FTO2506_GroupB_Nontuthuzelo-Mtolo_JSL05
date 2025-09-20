@@ -272,6 +272,22 @@ dialog {
   font-size: 1.125rem;
 }
 
+.submit-task-btn {
+  margin-top: 20px;
+  background-color: #635fc7;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 0.875rem;
+}
+
+.submit-task-btn:hover {
+    background-color: #4b48b6;
+}
+
 .close-btn {
   background: none;
   border: none;
