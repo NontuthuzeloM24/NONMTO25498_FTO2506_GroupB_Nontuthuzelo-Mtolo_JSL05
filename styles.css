@@ -132,6 +132,10 @@ header {
     transition: background-color 0.3s ease;
 }
 
+.add-task-btn:hover {
+    background-color: #4b48b6;
+}
+
 /* ===============
    Board Columns
 ================ */
@@ -376,6 +380,7 @@ form select {
 
   #header-board-name {
     font-size: 1rem;
+    display: none;
   }
 
   .task-div {
