@@ -13,7 +13,7 @@ const taskStatusSelect = document.getElementById('task-status');
 // Storage Helpers
 // -------------------------
 function loadTasks() {
-    const stored = localStorage.getItems('tasks');
+    const stored = localStorage.getItem('tasks');
     return stored ? JSON.parse(stored) : [...initialTasks];
 }
 
@@ -24,13 +24,13 @@ function saveTasks(tasks) {
 // -------------------------
 // Rendering Helpers
 // -------------------------
-function renderTask() {
+function renderTask(task) {
     const taskCard = document.createElement('div');
     taskCard.classList.add('task-div');
     taskCard.dataset.id = task.id;
     taskCard.textContent = task.title;
 
-    const container = document.querySelector(`column-div[data-status="${task.status}"] .tasks-container`);
+    const container = document.querySelector(`.column-div[data-status="${task.status}"] .tasks-container`);
     if (container) container.appendChild(taskCard);
 }
 
