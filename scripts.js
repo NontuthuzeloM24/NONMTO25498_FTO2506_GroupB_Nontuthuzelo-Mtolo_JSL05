@@ -9,6 +9,11 @@ const taskTitleInput = document.getElementById('task-title');
 const taskDescInput = document.getElementById('task-desc');
 const taskStatusSelect = document.getElementById('task-status');
 
+// Sidebar Footer Elements (Theme + Hide Sidebar)
+const themeSwitch = document.getElementById('theme-switch');
+const hideSidebarbtn = document.getElementById('hide-sidebar-btn');
+const sidebar = document.getElementById('side-bar-div');
+
 // -------------------------
 // Storage Helpers
 // -------------------------
@@ -92,11 +97,60 @@ function handleFormSubmit(e) {
 }
 
 // -------------------------
+// Theme Toggle Handling
+// -------------------------
+function toggleTheme() {
+    document.body.classList.toggle('dark-theme');
+    localStorage.setItem('theme', document.body.classList.contains('dark-theme') ? 'dark' : 'light')
+}
+
+function loadtheme() {
+    const savedTheme = localStorage.getItem('theme')
+    if (savedTheme === 'dark') {
+        document.body.classList.add('dark-theme');
+        if (themeSwitch) themeSwitch.checked = true;
+    }
+}
+
+// -------------------------
+// Sidebar Toggle Handling
+// -------------------------
+function toggleSidebar() {
+    sidebar.style.display = 'none'
+
+    // Add floating "Show Sidebar" button
+    const showBtn = document.createElement('button');
+    showBtn.textContent = '🚫 Show Sidebar';
+    showBtn.clasName = 'show-sidebar-btn';
+    showBtn.style.position = 'fixed';
+    showBtn.style.left = '10px';
+    showBtn.style.bottom = '10px';
+    showBtn.style.zIndex = '1000';
+    showBtn.style.backgroundColor = '#635fc7';
+    showBtn.style.color = 'white';
+    showBtn.style.border = 'none';
+    showBtn.style.padding = '8px 12px';
+    showBtn.style.borderRadius = '4px';
+    showBtn.style.cursor = 'pointer';
+
+    document.body.appendChild(showBtn);
+
+    showBtn.addEventListener('click', () => {
+        sidebar.style.display = 'flex';
+        showBtn.remove();
+    });
+}
+
+// -------------------------
 // Event Listeners
 // -------------------------
 addTaskBtn.addEventListener('click', openModal);
 closeModalBtn.addEventListener('click', closeModal);
 taskForm.addEventListener('submit', handleFormSubmit);
+
+if (themeSwitch) {
+    themeSwitch.addEventListener('change', toggleTheme);
+}
 
 // -------------------------
 // Initializing
@@ -104,3 +158,4 @@ taskForm.addEventListener('submit', handleFormSubmit);
 const tasks =  loadTasks();
 saveTasks(tasks); // ensure initialTasks are saved if not present
 renderAllTasks(tasks);
+loadtheme();
