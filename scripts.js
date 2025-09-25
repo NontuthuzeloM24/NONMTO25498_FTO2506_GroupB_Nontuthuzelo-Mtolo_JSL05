@@ -11,7 +11,7 @@ const taskStatusSelect = document.getElementById('task-status');
 
 // Sidebar Footer Elements (Theme + Hide Sidebar)
 const themeSwitch = document.getElementById('theme-switch');
-const hideSidebarbtn = document.getElementById('hide-sidebar-btn');
+const hideSidebarBtn = document.getElementById('hide-sidebar-btn');
 const sidebar = document.getElementById('side-bar-div');
 
 // -------------------------
@@ -104,7 +104,7 @@ function toggleTheme() {
     localStorage.setItem('theme', document.body.classList.contains('dark-theme') ? 'dark' : 'light')
 }
 
-function loadtheme() {
+function loadTheme() {
     const savedTheme = localStorage.getItem('theme')
     if (savedTheme === 'dark') {
         document.body.classList.add('dark-theme');
@@ -121,7 +121,7 @@ function toggleSidebar() {
     // Add floating "Show Sidebar" button
     const showBtn = document.createElement('button');
     showBtn.textContent = '🚫 Show Sidebar';
-    showBtn.clasName = 'show-sidebar-btn';
+    showBtn.className = 'show-sidebar-btn';
     showBtn.style.position = 'fixed';
     showBtn.style.left = '10px';
     showBtn.style.bottom = '10px';
@@ -155,7 +155,11 @@ if (themeSwitch) {
 // -------------------------
 // Initializing
 // -------------------------
+document.addEventListener('DOMContentLoaded', () => {
+    console.log('🚀 Kanban App Initializing...');
+
 const tasks =  loadTasks();
 saveTasks(tasks); // ensure initialTasks are saved if not present
 renderAllTasks(tasks);
-loadtheme();
+loadTheme();
+});
